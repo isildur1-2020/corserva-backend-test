@@ -10,6 +10,8 @@ import express, {
   ErrorRequestHandler,
 } from "express";
 import routerVersions from "./routers";
+import { config } from "./config/environment";
+import { sequelize } from "./database/connection";
 
 const app: Express = express();
 
@@ -25,6 +27,6 @@ app.use(((err, req: Request, res: Response, next: NextFunction) => {
   res.send("Something went wrong");
 }) as ErrorRequestHandler);
 
-app.listen(process.env.PORT, () => {
+app.listen(config.PORT, () => {
   console.log(`Server running on http://localhost:${process.env.PORT}`);
 });
