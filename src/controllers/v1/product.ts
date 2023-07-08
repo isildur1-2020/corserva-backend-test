@@ -9,7 +9,7 @@ export const createProduct = async (req: Request, res: Response) => {
     successResponse(res, newProduct, "Product created successfully", 201);
   } catch (err: any) {
     console.log(err);
-    errorResponse(res, err.message);
+    errorResponse(res, err.original.detail);
   }
 };
 
