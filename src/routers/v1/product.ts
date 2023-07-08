@@ -1,9 +1,15 @@
 import { Router } from "express";
 const router: Router = Router();
-import { productSchema } from "../../validation/v1";
-import { validation } from "../../middlewares/validation";
-import { createProduct } from "../../controllers/v1/product";
+import { validation } from "../../middlewares/v1/validation";
+import { productSchema, idSchema } from "../../validation/v1";
+import {
+  createProduct,
+  getAllProducts,
+  deleteProduct,
+} from "../../controllers/v1/product";
 
-router.post("/", validation(productSchema), createProduct);
+router.get("/", getAllProducts);
+router.post("/", validation(productSchema, "body"), createProduct);
+router.delete("/:id", validation(idSchema, "params"), deleteProduct);
 
 export default router;
