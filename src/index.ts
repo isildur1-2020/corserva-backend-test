@@ -1,4 +1,3 @@
-import "dotenv/config";
 import "./database/init";
 import cors from "cors";
 import helmet from "helmet";

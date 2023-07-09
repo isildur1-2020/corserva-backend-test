@@ -5,3 +5,4 @@ dist
 .gitignore
 .env.example
 docker-compose.yml
+Dockerfile
