@@ -1,19 +1,23 @@
 import { Router } from "express";
 const router = Router();
-import { orderSaleSchema } from "../../validation/v1";
 import { validation } from "../../middlewares/v1/validation";
+import { idSchema, orderSaleSchema } from "../../validation/v1";
+import { orderSaleSchemaOptional } from "../../validation/v1/orderSale";
 import {
   createOrderSale,
   updateOrderSale,
   deleteOrderSale,
-  findOneOrderSale,
   findAllOrderSales,
 } from "../../controllers/v1/orderSale";
 
-router.get("/:id", findOneOrderSale);
 router.get("/", findAllOrderSales);
 router.post("/", validation(orderSaleSchema, "body"), createOrderSale);
-router.patch("/:id", updateOrderSale);
-router.delete("/:id", deleteOrderSale);
+router.patch(
+  "/:id",
+  validation(idSchema, "params"),
+  validation(orderSaleSchemaOptional, "body"),
+  updateOrderSale
+);
+router.delete("/:id", validation(idSchema, "params"), deleteOrderSale);
 
 export default router;

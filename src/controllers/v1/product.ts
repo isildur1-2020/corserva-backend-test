@@ -26,11 +26,22 @@ export const getAllProducts = async (_: Request, res: Response) => {
   }
 };
 
+export const updateProduct = async (req: Request, res: Response) => {
+  try {
+    const { id } = req.params;
+    const [data] = await ProductModel.update(req.body, { where: { id } });
+    successResponse(res, null, data !== 0 ? `PK: ${id} updated` : "No items");
+  } catch (err: any) {
+    console.log(err);
+    errorResponse(res, err.message);
+  }
+};
+
 export const deleteProduct = async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
     const itemsDeleted = await ProductModel.destroy({ where: { id } });
-    const message = itemsDeleted === 1 ? `${id} deleted.` : "No items";
+    const message = itemsDeleted === 1 ? `PK: ${id} deleted.` : "No items";
     successResponse(res, itemsDeleted, message);
   } catch (err: any) {
     console.log(err);

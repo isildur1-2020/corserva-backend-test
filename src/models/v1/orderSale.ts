@@ -2,17 +2,9 @@ import { DataTypes, Sequelize } from "sequelize";
 
 type OrderSaleStatus = "PENDING" | "COMPLETED" | "CANCELED";
 
-interface ProductInfo {
-  productId: number;
-  discount: number;
-  quantity: number;
-}
-
 export interface IOrderSale {
-  id: number;
   status: OrderSaleStatus;
   trackingInfo: string;
-  products: ProductInfo[];
 }
 
 export default (sequelize: Sequelize) => {
