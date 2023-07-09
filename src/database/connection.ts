@@ -15,12 +15,11 @@ export class SequelizeConnection {
 
   private static databaseConnection() {
     const dialect = "postgres";
-    const host = config.DB_HOST;
     SequelizeConnection.instance = new Sequelize(
       config.DB_NAME,
       config.DB_USER,
       config.DB_PASSWORD,
-      { host, dialect }
+      { host: "corserva_db", dialect }
     );
   }
 
