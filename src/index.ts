@@ -1,4 +1,5 @@
 import "dotenv/config";
+import "./database/init";
 import cors from "cors";
 import helmet from "helmet";
 import morgan from "morgan";
@@ -11,7 +12,6 @@ import express, {
 } from "express";
 import routerVersions from "./routers";
 import { config } from "./config/environment";
-import { sequelize } from "./database/connection";
 
 const app: Express = express();
 

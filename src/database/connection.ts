@@ -1,7 +1,7 @@
 import { Sequelize } from "sequelize";
 import { config } from "../config/environment";
 
-class SequelizeConnection {
+export class SequelizeConnection {
   private static instance: Sequelize;
   private constructor() {}
 
@@ -33,5 +33,3 @@ class SequelizeConnection {
     }
   }
 }
-
-export const sequelize = SequelizeConnection.getInstance();
