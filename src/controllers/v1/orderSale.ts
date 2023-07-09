@@ -1,4 +1,5 @@
 import { Request, Response } from "express";
+import { IOrderSale } from "../../models/v1/orderSale";
 import { successResponse, errorResponse } from "../../controllers/v1/responses";
 import {
   ProductModel,
@@ -8,21 +9,32 @@ import {
 
 export const createOrderSale = async (req: Request, res: Response) => {
   try {
-    // const newOrderSale = await OrderSaleModel.create({
-    //   quantity: 2,
-    //   discount: 20,
-    //   taxes: 16,
-    //   status: "COMPLETED",
-    //   trackingInfo: "232nsb",
-    // });
-    // const newX = await OrderProductModel.create({
-    //   orderSaleId: 1,
-    //   productId: 1,
-    // });
-    res.end();
+    const orderSale: IOrderSale = req.body;
+    const { status, trackingInfo, products } = orderSale;
+    const newOrderSale = await OrderSaleModel.create({
+      status,
+      trackingInfo,
+    });
+    for (let item of products) {
+      const { productId, quantity, discount } = item;
+      await OrderProductModel.create({
+        discount,
+        quantity,
+        productId,
+        orderSaleId: newOrderSale.dataValues.id,
+      });
+    }
+    successResponse(res, newOrderSale, "OK", 201);
   } catch (err: any) {
     console.log(err);
-    errorResponse(res, err.original.detail);
+    errorResponse(res, err.message);
+  }
+};
+
+export const addProductsToOrderSale = async () => {
+  try {
+  } catch (err) {
+    console.log(err);
   }
 };
 

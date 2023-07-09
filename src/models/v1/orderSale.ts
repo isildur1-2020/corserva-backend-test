@@ -2,10 +2,17 @@ import { DataTypes, Sequelize } from "sequelize";
 
 type OrderSaleStatus = "PENDING" | "COMPLETED" | "CANCELED";
 
+interface ProductInfo {
+  productId: number;
+  discount: number;
+  quantity: number;
+}
+
 export interface IOrderSale {
-  taxes: number;
+  id: number;
   status: OrderSaleStatus;
   trackingInfo: string;
+  products: ProductInfo[];
 }
 
 export default (sequelize: Sequelize) => {
@@ -16,10 +23,6 @@ export default (sequelize: Sequelize) => {
         type: DataTypes.INTEGER,
         primaryKey: true,
         autoIncrement: true,
-      },
-      taxes: {
-        type: DataTypes.SMALLINT,
-        allowNull: false,
       },
       status: {
         type: DataTypes.STRING,

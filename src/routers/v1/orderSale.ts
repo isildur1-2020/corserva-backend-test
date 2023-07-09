@@ -1,5 +1,7 @@
 import { Router } from "express";
 const router = Router();
+import { orderSaleSchema } from "../../validation/v1";
+import { validation } from "../../middlewares/v1/validation";
 import {
   createOrderSale,
   updateOrderSale,
@@ -10,7 +12,7 @@ import {
 
 router.get("/:id", findOneOrderSale);
 router.get("/", findAllOrderSales);
-router.post("/", createOrderSale);
+router.post("/", validation(orderSaleSchema, "body"), createOrderSale);
 router.patch("/:id", updateOrderSale);
 router.delete("/:id", deleteOrderSale);
 
