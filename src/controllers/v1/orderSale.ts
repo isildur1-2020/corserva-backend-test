@@ -1,24 +1,53 @@
 import { Request, Response } from "express";
-import { OrderSaleModel } from "../../database/init";
+import { IProduct } from "../../models/v1/orderSale";
 import { IOrderSale } from "../../models/v1/orderSale";
+import { OrderProductModel } from "../../database/init";
+import { OrderSaleModel, ProductModel } from "../../database/init";
 import { successResponse, errorResponse } from "../../controllers/v1/responses";
+
+const orderProductEnrroll = async (
+  res: Response,
+  orderSaleId: number,
+  products: IProduct[]
+) => {
+  try {
+    const enrrollPromises: Promise<any>[] = [];
+    for (let product of products) {
+      const { productId, quantity, discount } = product;
+      const auxPromise = OrderProductModel.create({
+        quantity,
+        discount,
+        productId,
+        orderSaleId,
+      });
+      enrrollPromises.push(auxPromise);
+    }
+    await Promise.all(enrrollPromises);
+  } catch (err: any) {
+    OrderSaleModel.destroy({ where: { id: orderSaleId } });
+    errorResponse(res, err.original.detail);
+  }
+};
 
 export const createOrderSale = async (req: Request, res: Response) => {
   try {
     const orderSale: IOrderSale = req.body;
-    const { status, trackingInfo } = orderSale;
+    const { status, trackingInfo, products } = orderSale;
     const newOrderSale = await OrderSaleModel.create({ status, trackingInfo });
+    await orderProductEnrroll(res, newOrderSale.dataValues.id, products);
     const message = "Order sale created successfully.";
     successResponse(res, newOrderSale, message, 201);
   } catch (err: any) {
     console.log(err);
-    errorResponse(res, err.original.detail);
+    errorResponse(res, err.message);
   }
 };
 
 export const findAllOrderSales = async (req: Request, res: Response) => {
   try {
-    const orderSalesFound = await OrderSaleModel.findAll();
+    const orderSalesFound = await OrderSaleModel.findAll({
+      include: [ProductModel],
+    });
     const message = "Order sales found successfully.";
     successResponse(res, orderSalesFound, message);
   } catch (err: any) {
