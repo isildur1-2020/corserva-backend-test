@@ -1,0 +1,120 @@
+{
+	"info": {
+		"_postman_id": "bc5402a9-ad36-4b5f-b727-99afe5b7f087",
+		"name": "Order Sale",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "17512849"
+	},
+	"item": [
+		{
+			"name": "Create an order sale",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"status\": \"PENDING\",\n    \"trackingInfo\": \"KZLS65SJJSHNW87\",\n    \"products\": [\n        {\n            \"productId\": 1,\n            \"quantity\": 230,\n            \"discount\": 20\n        },\n         {\n            \"productId\": 3,\n            \"quantity\": 20,\n            \"discount\": 19\n        },\n         {\n            \"productId\": 4,\n            \"quantity\": 190,\n            \"discount\": 30\n        },\n         {\n            \"productId\": 5,\n            \"quantity\": 298,\n            \"discount\": 23\n        },\n         {\n            \"productId\": 6,\n            \"quantity\": 87,\n            \"discount\": 8\n        }\n    ]\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/v1/order-sale",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"order-sale"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get all order sales",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/v1/order-sale",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"order-sale"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update an order",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "status",
+							"value": "COMPLETED",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/v1/order-sale/15",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"order-sale",
+						"15"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete an order sale",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": []
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/v1/order-sale/14",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"order-sale",
+						"14"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
