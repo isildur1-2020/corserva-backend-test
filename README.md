@@ -11,7 +11,7 @@
 
 **run server**
 
-- docker-compose build && docker-compose -d up
+- docker-compose build && docker-compose up -d
 
 **run test**
 
