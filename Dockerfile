@@ -1,7 +1,7 @@
 FROM node:18-alpine as dev
 WORKDIR /app
 COPY ./package*.json .
-RUN yarn install --frozen-lockfile
+RUN yarn install
 CMD ["npm", "run", "serve"]
 
 FROM node:18-alpine as deps-prod
