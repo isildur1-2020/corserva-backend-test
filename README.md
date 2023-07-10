@@ -13,6 +13,10 @@
 
 - docker-compose build && docker-compose up -d
 
+**run seed**
+
+- docker exec corserva_backend /bin/sh -c "cd dist && npx sequelize-cli db:seed:all"
+
 **run test**
 
 - npm run test

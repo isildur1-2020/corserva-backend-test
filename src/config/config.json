@@ -1,0 +1,9 @@
+{
+    "development": {
+      "username": "corserva_user",
+      "password": "2U4K3nk23D1GIf",
+      "database": "corserva",
+      "host": "corserva_db",
+      "dialect": "postgres"
+    }
+  }
