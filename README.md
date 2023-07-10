@@ -19,7 +19,7 @@
 
 # Url available
 
-- Product: http://0.0.0.0:8000/api/v1/product/
-- Order Sale: http://0.0.0.0:8000/api/v1/order-sale/
+- Product: http://0.0.0.0:8080/api/v1/product/
+- Order Sale: http://0.0.0.0:8080/api/v1/order-sale/
 
 Creator: Esteban Gómez
